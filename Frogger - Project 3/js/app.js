@@ -94,11 +94,11 @@ document.addEventListener('keyup', function(e) {
 
 Player.prototype.handleInput = function(keyCode) {
   if (keyCode == 'up'){
-    this.x += 100;
-  } else if (keyCode == 'down') {
-    this.x -= 100;
-  } else if (keyCode == 'left') {
     this.y -= 100;
-  } else (keyCode == 'right')
+  } else if (keyCode == 'down') {
     this.y += 100;
+  } else if (keyCode == 'left') {
+    this.x += 100;
+  } else if (keyCode == 'right')
+    this.x -= 100;
   };
