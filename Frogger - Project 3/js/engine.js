@@ -162,14 +162,14 @@ var Engine = (function(global) {
     function reset() {
         // noop
     }
-
+//checkcollisions function checks if any enemy position overides the position of the player in order to detect collisions
     var COLLISION_MARGIN = 75;
 
     function checkCollisions() {
         for (var i = 0, len = allEnemies.length; i < len; i++) {
             if (Math.abs((allEnemies[i].x - player.x)) < COLLISION_MARGIN &&
                 Math.abs((allEnemies[i].y - player.y)) < COLLISION_MARGIN) {
-                    // crash
+                    // collisions
                     player.reset();
                     alert("YOU LOSE!");
                 }

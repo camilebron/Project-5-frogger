@@ -1,6 +1,7 @@
 var lanes = [60, 145, 230, 300];
 
 // Credits http://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
+// getRandomInt function allows us to ger a random integer later used to randomize enemy bug position or lanes
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -14,11 +15,6 @@ var Enemy = function() {
     this.width = 101;
     this.height = 75;
 };
-
-
-
-
-// define a constant value for collision detection (you should test and fine the correct value)
 
 
 Enemy.prototype.update = function(dt) {
@@ -59,14 +55,11 @@ for (var i = 0; i <= 3; i++) {
 };
 
 var Player = function() {
-      this.x = 200; //player star position
+      this.x = 200; //player start position
       this.y = 408;
       this.sprite = 'images/char-horn-girl.png';
       this.width = 90;
       this.height = 89;
-      //if(player.y >){ //limit players movements to canvas width ahd height
-
-      //}
   };
 
 var player = new Player();
@@ -85,7 +78,7 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.reset = function(){
-  //var self = this;
+  //var self = this; //for function inside a function in a prototype construct
     this.x = 200;
     this.y = 408;
 
