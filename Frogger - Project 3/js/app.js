@@ -14,27 +14,11 @@ var Enemy = function() {
     this.width = 101;
     this.height = 75;
 };
-function positionReset() { //if collision detected reset player to start position, if player reaches water alert you won, and position reset to start.
-  /*if(checkCollision = true || player.y = (range btween 0-87)) {
-  positionReset
-  }*/
-    player.x = 200;
-    player.y = 425;
-    //console.log (positionReset);
-};
 
 
-function checkCollisions() {
 
-    if (Enemy.x < Player.x + Player.width &&
-    Enemy.x + Enemy.width > Player.x &&
-    Enemy.y < Player.y + Player.height &&
-    Enemy.height + Enemy.y > Player.y) {
-        positionReset(); // collision detected. player returns to start position.
-        alert("YOU LOSE!");
-    };
-    //console.log(checkCollisions);
-  };
+
+// define a constant value for collision detection (you should test and fine the correct value)
 
 
 Enemy.prototype.update = function(dt) {
@@ -44,7 +28,6 @@ Enemy.prototype.update = function(dt) {
       this.x = 0;
       this.y = lanes[getRandomInt(0, lanes.length-1)];//enemy changing lanes when reappearing
     };
-    checkCollisions();
   };
 
 Enemy.prototype.getspeed = function(){
@@ -77,7 +60,7 @@ for (var i = 0; i <= 3; i++) {
 
 var Player = function() {
       this.x = 200; //player star position
-      this.y = 425;
+      this.y = 408;
       this.sprite = 'images/char-horn-girl.png';
       this.width = 90;
       this.height = 89;
@@ -91,18 +74,22 @@ var player = new Player();
 
 Player.prototype.update = function() {
 
-      if (this.y == 0) {
+      if (this.y > 0 && this.y < 50) {
         this.reset();
         alert("YOU WON!!");
     };
-    checkCollisions();
-
   };
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Player.prototype.reset = function(){
+  //var self = this;
+    this.x = 200;
+    this.y = 408;
+
+};
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
@@ -120,11 +107,17 @@ document.addEventListener('keyup', function(e) {
 
 Player.prototype.handleInput = function(keyCode) {
   if (keyCode == 'up'){
-    this.y -= 87; // decrease
+    this.y -= 101; // decrease
   } else if (keyCode == 'down') {
-    this.y += 87;
+      if (this.y <= 400 ){
+        this.y += 101;
+      }
   } else if (keyCode == 'left') {
-    this.x -= 87;
+      if (this.x > 0){
+        this.x -= 83;
+    }
   } else if (keyCode == 'right')
-    this.x += 87;
+      if (this.x < 400){
+        this.x += 83;
+    }
 };

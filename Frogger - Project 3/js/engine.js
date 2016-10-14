@@ -80,7 +80,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -163,6 +163,18 @@ var Engine = (function(global) {
         // noop
     }
 
+    var COLLISION_MARGIN = 75;
+
+    function checkCollisions() {
+        for (var i = 0, len = allEnemies.length; i < len; i++) {
+            if (Math.abs((allEnemies[i].x - player.x)) < COLLISION_MARGIN &&
+                Math.abs((allEnemies[i].y - player.y)) < COLLISION_MARGIN) {
+                    // crash
+                    player.reset();
+                    alert("YOU LOSE!");
+                }
+        }
+    }
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
